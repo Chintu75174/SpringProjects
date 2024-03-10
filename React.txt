@@ -1,0 +1,181 @@
+React
+
+Lec 41:
+
+Custom Components names 1st character is Upper case to tell react that it is a user created component not an built in one 
+If we want to render dynamic content in a component we would have to enclosed it in curly braces { }
+if statement , for loops function definition are not allowed here
+Only expression that produce a value i.e. for e.g {1+1}
+It is used to blend code content with dynamic values
+
+for e.g to render dynamic values randomly
+const reactDescriptions = ['Fundamental','Crucial','Core'];
+
+function genRandomInt(max){
+return Math.floor(Math.random()*(max+1));
+}
+
+function Header()
+{
+return(
+<p>{reactDescriptions[getRandomInt(2)]} // where 2 is the maximum value of the given array
+<p/>
+);
+}
+
+or 
+
+const description = reactDescriptions[getRandomInt(2)];
+
+<p>{description}<p/>
+
+Lec 42
+
+We can use the same above syntx to load an image dynamically	
+when we write code the images which are declared insde the " " can get lost during the deployement or after the build process it is better to define it inside curly braces
+
+import reactImg from './assests/file_name.png';
+<img  src = {reactImg} />
+
+Lec 43
+
+React allow you to pass data to components via a concept called Props
+Props are basically used for reusability of the components
+Every time we are using the same component we want to send different data
+
+for e.g.
+<CoreConcept title ="Components" description="The Core UI Building Block"/> // we can define user defined attributes
+Now we have to add in function definition
+function CoreConcepts(props) //“Props” is a special keyword in React, which stands for properties and is being used for passing data from one component to another.
+{
+
+} 
+
+How will props function?
+
+1.(Set Props)
+Props are custom HTML attributes set on components 
+<CoreConcept title="Components" description="Core UI Building Blocks"/>
+
+2.(Merge into object)
+React mersges all the props into a single object
+{
+	title:'Components'
+	description:'Core UI'
+}
+
+3.(Receive Props)
+Props are passed to the component function as the first argument by React
+function CoreConcept(props)
+{
+	return <h3>{props.title}<h3/>;
+}
+
+Lec 44 
+Alternative Props Syntax
+
+this following data is in data.js
+=>
+export const CORE_CONCEPT = [
+{	
+	image : componentsImg,
+	title : 'Components',
+	description : '***'
+},
+{
+	...
+}
+]
+
+In App.jsx
+import {CORE_CONCEPT} from './data.js';
+<CoreConcept title ={CORE_CONCEPT[0].title}/>
+
+or 
+the following code will give the same result as above with shorter syntax
+<CoreConcept {...CORE_CONCEPT[0]}/> //All title,desc,and img will be fetched
+
+ or by target destructuring concept 
+
+function CoreConcept({image,title,description}){
+return (
+<li>
+<img src={image}>
+<h3>{title}<h3/>
+<li/>);
+}
+
+Lec 46
+Storing Components in the Files using a Good Project Structure
+
+Lec 47
+Storing Component style files next to components 
+
+Lec 48 
+Chlidren Props Concept
+
+If we create a TabButton.jsx file
+
+export default function TabButton(props)
+{
+	return <li><button>{props.children}</button><li>;
+}
+// This is a prop set by react, children refers to the Content between the tags
+
+or 
+
+export default function TabButton({children})
+{
+	return <li><button>{children}</button><li>;
+}	//by object desctructuring
+In App.jsx 
+<menu>
+	<TabButton>Components</TabButton>
+</menu>
+
+
+OR
+
+by Attributes
+<TabButton label ="Components"></TabButton>
+
+function TabButton({label})
+{
+	return <button>{label}</button>;
+}
+
+Lec 49
+
+Reacting to Event
+After Clicking it show different content
+
+The advantage of defining event handler functions inside the component function is that they then have access to components props and state
+
+export default function TabButton({children})
+{
+	function clickHandler(){
+		console.log('Hello World')
+	}
+	return (
+	<li>
+		<button onClick={clickHandler}>{children}</button>
+	</li>
+	);
+}
+
+// It is the value that is passed to the not the function it should execute on an event occurance
+
+Lec 50
+Passing functions as values to Props
+
+After Clicking it show different content
+
+Lec 51
+to create Anaonymous function 
+<TabButton onSelect ={() => handleSelect()}> Components</TabButton>
+Anonymous arrow function is passed as a value to onSelect
+we can write code inside arrow function body
+
+Lec 52
+
+
