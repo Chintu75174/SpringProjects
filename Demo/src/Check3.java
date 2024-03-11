@@ -4,6 +4,7 @@ public class Check3 {
 	public static void main(String[] args) {
 		System.out.println("Git From STS");
 		System.out.println("Git from Browser manually edit");
+		System.out.println("Check from STS");
 	}
 
 }
